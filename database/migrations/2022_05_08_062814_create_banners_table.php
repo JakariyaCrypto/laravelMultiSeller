@@ -20,7 +20,7 @@ class CreateBannersTable extends Migration
             $table->string('conditional')->default('summer-collection');
             $table->mediumText('description')->nullable();
             $table->string('photo');
-            $table->enum('status',['active','inactive']);
+            $table->enum('status',['active','inactive'])->default('active');
             $table->timestamps();
         });
     }
