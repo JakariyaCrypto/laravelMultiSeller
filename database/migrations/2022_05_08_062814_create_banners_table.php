@@ -17,7 +17,7 @@ class CreateBannersTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->bigInteger('conditional')->default('summer-collection');
+            $table->string('conditional')->default('summer-collection');
             $table->mediumText('description')->nullable();
             $table->string('photo');
             $table->enum('status',['active','inactive']);
