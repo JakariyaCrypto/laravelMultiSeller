@@ -6,6 +6,9 @@
     <div class="animated fadeIn">
         <div class="py-3 d-flex justify-content-between align-items-center">
                 <div class="header-left"><h5><i class="fa fa-bars"></i> All Banners</h5></div>
+
+                <div class="header-rith"><a href="{{route('pdfGenerate')}}" class="btn btn-success rounded"><i class="fa fa-print"></i> Pdf</a></div>
+
                 <div class="header-rith"><a href="{{route('banner.create')}}" class="btn btn-success rounded"><i class="fa fa-plus"></i> Add New</a></div>
             </div>
 
@@ -32,19 +35,28 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$item->title}}</td>
-                                    <td>{{$item->description}}</td>
+                                    <td style="width: 25%">{{$item->description}}</td>
                                     <td><img src="{{asset($item->photo)}}" alt="" style="height:50px;width:70px"></td>
+
                                     <td><h6 class="badge badge-success py-1">{{$item->conditional}}</h6></td>
                                     <td>
+
                                     <input type="checkbox" data-toggle="switchbutton" data-onlabel="Active"
-                                     data-offlabel="Inactive" data-onstyle="success" data-offstyle="danger" data-size="sm"
-                                    name="status" value="{{$item->id}}" id="status" {{$item->status==='active' ? 'checked' : '' }}
+                                     data-offlabel="Inactive" data-onstyle="success" data-offstyle="danger" data-size="sm" name="status" value="{{$item->id}}" id="status_change"
+                                     {{$item->status == 'active' ? 'checked' : ''}}
                                      >
 
                                     </td>
                                     <td>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="edit" class="btn btn-sm btn-outline-warning rounded"><i class="fa fa-edit font-lg"></i></a>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="delete" class="btn btn-sm btn-outline-danger rounded"><i class="fa fa-trash"></i></a>
+                                        <a href="{{route('banner.edit',$item->id)}}" data-toggle="tooltip" data-placement="top" title="edit" class="btn btn-sm btn-outline-warning rounded"><i class="fa fa-edit font-lg"></i></a>
+                                        <a href="#" data-id="{{$item->id}}" data-toggle="tooltip" data-placement="top" title="delete" class="del-btn btn btn-sm btn-outline-danger rounded"><i class="fa fa-trash"></i></a>
+
+                                    <form action="{{route('banner.destroy', $item->id)}}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        
+                                    </form>
+
                                     </td>
                                 </tr>
                                 @endforeach
@@ -60,13 +72,73 @@
     </div><!-- .animated -->
 </div><!-- .content -->
 
+
 @endsection
 
 @section('script')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<!-- delete -->
+<script>
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+$('.del-btn').click(function(e){
+    e.preventDefault();
+    var form = $(this).closest('form');
+    var dataId = $(this).data('id');
+
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this imaginary file!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+        form.submit();
+      if (willDelete) {
+        swal("Poof! Your imaginary file has been deleted!", {
+          icon: "success",
+        });
+      } else {
+        swal("Your imaginary file is safe!");
+      }
+    });
+
+
+
+});
+</script>
+
+
+<!-- change status -->
     <script>
-        $('#status').change(function(){
-            var changeStatus = $(this).prop('checked');
-            alert(changeStatus);
+        $('input[name=status]').change(function(){
+            
+            var status = $(this).prop('checked');
+            // alert(status);exit;
+            var id = $(this).val();
+            // alert(id);
+            $.ajax({
+                url: "{{route('banner.status')}}",
+                type: 'POST',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    mode: status,
+                    id: id,
+                },
+                success: function(response){
+                    $('#bannerModal').modal('show');
+                    console.log(response.status);
+                }
+            });
+
         });
     </script>
 @endsection
+

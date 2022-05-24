@@ -40,13 +40,11 @@
                             
                         </div>
                         <div class="has-success form-group">
-                            <label for="inputIsValid" class="form-control-label">Banner Condition <strong class="text-primary"> *</strong></label>
-                            <select name="conditional" class="form-controll-success form-control">
-                                <option value="">---choose condition---</option>
-                                <option value="1">hot Deal</option>
-                                <option value="2">summer collection</option>
-                                <option value="3">Winter deal</option>
-                                <option value="4">Mega offer</option>
+                            <label for="inputIsValid" class="form-control-label">Banner Condition <strong class="text-primary"> *</strong></label> 
+                            <select name="conditional" class="form-control">
+                                <option value="">--- select condition ----</option>
+                                <option value="banner">Banner</option>
+                                <option value="promo">Promo</option>
                             </select>
                              @error('conditional')
                                 <div class="alert alert-danger">

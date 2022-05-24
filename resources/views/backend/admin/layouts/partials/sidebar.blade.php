@@ -96,6 +96,13 @@
                             <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">All Stock</a></li>
                         </ul>
                     </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Others</a>
+                        <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-puzzle-piece"></i><a href="{{route('main.index')}}">Send Mail</a></li>
+                            <li><i class="fa fa-id-badge"></i><a href="{{route('mobile.index')}}">Send SMP </a></li>
+                        </ul>
+                    </li>
 
 
                     <li>
