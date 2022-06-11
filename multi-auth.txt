@@ -1,0 +1,125 @@
+1/ add $table()->enum('role',['admin','vendor','customer'])->default('customer');
+2/ migrate 3/ create AdminController 
+3/ create route,admin,customer and vendor
+
+this is for admin panel
+Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
+	Route::get('dashboard',[App\Http\Controllers\backend\admin\AdminController::class,'index'])->name('admin.dashboard');
+	Route::get('prfile',[App\Http\Controllers\backend\admin\AdminController::class,'profile'])->name('admin.prfile');
+	Route::get('setting',[App\Http\Controllers\backend\admin\AdminController::class,'setting'])->name('admin.setting');
+});
+
+
+this is for vendor panel
+Route::group(['prefix'=>'vendor','middleware'=>'auth'],function(){
+	Route::get('dashboard',[App\Http\Controllers\backend\vendor\VendorController::class,'index'])->name('vendor.dashboard');
+	Route::get('prfile',[App\Http\Controllers\backend\admin\VendorController::class,'profile'])->name('vendor.prfile');
+	Route::get('setting',[App\Http\Controllers\backend\admin\VendorController::class,'setting'])->name('vendor.setting');
+});
+
+4/ add role in use model
+5/ crate this function in loginController 
+
+use Illuminate\Http\Request;   ///use requst file this controller
+
+// crate custom function
+    protected function redirectTo()
+    {
+        if(Auth()->user->role == 'admin'){
+            return route('admin.dashboard')
+        }elseif (Auth()->user->role == 'vendor') {
+            return route('vendor.dashboard')
+        }elseif (Auth()->user->role == 'customer') {
+            return route('customer.dashboard');
+        }
+    }
+
+
+6/ 
+    // custom login function overwrite the main login function create in login controller
+    public function login(Request $request)
+    {
+        $input = $request->all();
+
+        $this->validate($request,[
+            'email' => 'required|eamil',
+            'password' => 'required',
+        ]);
+
+        //check user
+        if (auth()->attempt(array('email'=>$input['email'],'password'=> $input['password']))) {
+            
+            if (Auth()->user->role == 'admin') {
+                return redirect()->route('admin.dashboard');
+            }elseif (Auth()->user->role == 'vendor') {
+                return redirect()->route('vendor.dashboard');
+            }elseif (Auth()->user->role == 'customer') {
+                return redirect()->route('customer.dashboard');
+            }
+
+        }else{
+            return redirect()->route('login')->with('error','E-mail & Password are Wrong !')
+        }
+    }
+
+7/ add 'role' => 'customer' in register controller
+7/ create all middleware
+8/ create function in middleware
+
+public function handle(Request $request, Closure $next)
+    {
+        // custom function for admin
+        if (Auth::check() && Auth()->user->role == 'admin' {
+            return $next($request);
+            
+        }else{
+            return redirect()->route('login');
+        }
+    }
+
+
+public function handle(Request $request, Closure $next)
+    {
+        // custom function for vendor
+        if (Auth::check() && Auth()->user->role == 'admin' {
+            return $next($request);
+            
+        }else{
+            return redirect()->route('login');
+        }
+    }
+
+
+
+    public function handle(Request $request, Closure $next)
+    {
+        // custom function for customer
+        if (Auth::check() && Auth()->user->role == 'admin' {
+            return $next($request);
+            
+        }else{
+            return redirect()->route('login');
+        }
+    }
+
+
+9/ create this redirectIfAuthenticed middleware
+
+foreach ($guards as $guard) {
+
+    // custom codition
+    if (Auth::guard($guard)->check() && Auth::user()->role == 'admin') {
+        return redirect()->route('admin.dashboard');
+    }elseif (Auth::guard($guard)->check() && Auth::user()->role == 'vendor') {
+        return redirect()->route('vendor.dashboard');
+    }elseif (Auth::guard($guard)->check() && Auth::user()->role == 'customer') {
+        return redirect()->route('customer.dashboard');
+    }
+}
+
+10/ has some problem when login then click borwser back arrow redirect is login page.it is not good.will be fixed the problem
+
+
+
+11/ if add new user by the role waye.create custom register funtion 
+

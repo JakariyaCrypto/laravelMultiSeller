@@ -1,0 +1,12 @@
+emai => admin@gmail.com
+pwd => adminadmin
+
+
+
+emai => vendor@gmail.com
+pwd => vendorvendor
+
+
+
+emai => customer@gmail.com
+pwd => customercustomer

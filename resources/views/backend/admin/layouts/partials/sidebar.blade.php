@@ -40,10 +40,9 @@
                     </li>
                     
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Slider Manage</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>File Pond</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a href="ui-buttons.html">Add Slider</a></li>
-                            <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">All Slider</a></li>
+                            <li><i class="fa fa-puzzle-piece"></i><a href="{{route('file-pond.create')}}">Create Folder </a></li>
                         </ul>
                     </li>
 

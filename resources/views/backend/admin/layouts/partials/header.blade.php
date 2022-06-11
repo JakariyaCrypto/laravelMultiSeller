@@ -26,7 +26,9 @@
     <link rel="stylesheet" href="{{asset('backend/assets/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('backend/assets/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('backend/assets/switch-button-bootstrap/css/bootstrap-switch-button.min.css')}}">
-
+<!-- Filepond stylesheet -->
+  <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+  
     <!-- include summernote css/js -->
     <link href="{{asset('backend/assets/summernote-0.8.18/summernote.min.css')}}" rel="stylesheet">
 
