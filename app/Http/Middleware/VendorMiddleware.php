@@ -18,10 +18,10 @@ class VendorMiddleware
     public function handle(Request $request, Closure $next)
     {
         // custom function 
-        if (Auth::check() && Auth::user()->role == 'vendor') {
+        if (Auth::guard('seller')->check()) {
             return $next($request);
         }else{
-            return redirect()->route('login');
+            return redirect()->route('seller.login.form')->with('warning','You Don`t Have Access Permission');
         }
 
 

@@ -47,14 +47,15 @@
                                      >
 
                                     </td>
-                                    <td>
-                                        <a href="{{route('banner.edit',$item->id)}}" data-toggle="tooltip" data-placement="top" title="edit" class="btn btn-sm btn-outline-warning rounded"><i class="fa fa-edit font-lg"></i></a>
-                                        <a href="#" data-id="{{$item->id}}" data-toggle="tooltip" data-placement="top" title="delete" class="del-btn btn btn-sm btn-outline-danger rounded"><i class="fa fa-trash"></i></a>
+
+                                    <td class="d-flex">
+                                        <a href="{{route('banner.edit',$item->id)}}" data-toggle="tooltip" data-placement="top" title="edit" class="btn btn-sm btn-outline-warning rounded mr-1"><i class="fa fa-edit font-lg"></i></a>
+                                        
 
                                     <form action="{{route('banner.destroy', $item->id)}}" method="post">
                                         @csrf
                                         @method('delete')
-                                        
+                                        <a href="#" data-id="{{$item->id}}" data-toggle="tooltip" data-placement="top" title="delete" class="del-btn btn btn-sm btn-outline-danger rounded"><i class="fa fa-trash"></i></a>
                                     </form>
 
                                     </td>

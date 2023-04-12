@@ -10,3 +10,187 @@ pwd => vendorvendor
 
 emai => customer@gmail.com
 pwd => customercustomer
+
+
+
+
+///****************************** mutli auth with guard  ***********************///
+
+condig->auth.php
+
+///write role for gurads
+
+    'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+        'seller' => [
+            'driver' => 'session',
+            'provider' => 'sellers',
+        ],
+        'rider' => [
+            'driver' => 'session',
+            'provider' => 'riders',
+        ],
+
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+            'hash' => false,
+        ],
+    ],
+
+
+///write provider
+
+
+'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\backend\admin\Admin::class,
+        ],
+
+        'sellers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\backend\seller\Seller::class,
+        ],
+
+        'riders' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\backend\rider\Rider::class,
+        ],
+        
+    ],
+
+
+ //write password
+
+     'passwords' => [
+        'users' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+         'sellers' => [
+            'provider' => 'sellers',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'riders' => [
+            'provider' => 'riders',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+    ],
+
+
+
+/// model configration
+
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+class User extends Authenticatable{
+	use HasFactory, Notifiable;
+	protected $guard = 'admins';
+	protected $fillable = ['full_name','email','password','status'];
+}
+
+
+///create seeder in UserSeederTable.php
+
+DB::table('admins')->insert([
+
+     // admin
+     [
+        'name'=> 'Admin Dev',
+        'email'=> 'admin@gmail.com',
+        'password'=> Hash::make('admin'),
+        'status'=> 'active',
+
+    ],
+]);
+
+//run 
+php artisan migrate:fresh --seed
+
+
+//createm admin login controller 
+admin/LoginController in AuthFolder
+
+//web.php
+
+Route::group(['prefix'=>'admin'],function(){
+	Route::get('login',[\App\Http\Controllers\Auth\Admin\AdminController::class,'loginForm'])->name('admin.login.form');
+	Route::post('login',[\App\Http\Controllers\Auth\Admin\AdminController::class,'login'])->name('admin.login');
+});
+
+
+
+///login function
+public function login(Request $request){
+	if(Auth::guard('admin')->attempt(['email'=>$request->email,'password'=>$request->password])){
+		return redirect()->intended(route('admin.dashboard'))->with('success','Login Successfully')
+	}else{
+		return back()->withInput($request->only('email'))
+	}
+}
+
+//remove auth
+web.php admin middleware
+//write admin middleware
+if(Auth::guard('admin')->check()){
+	return $next($request);
+	}else{
+		return redirect()->route('admin.login.form')->with('warning','You Don`t Have Access Permission');
+	}
+
+
+
+
+Auth::guard('admin')->user()->email
+
+
+Auth::guard('user') ? 
+Auth::guard('user')->id : 
+Auth::guard('admin')->id ,
+
+                                    
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }
+
+    protected function create(array $data)
+    {
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
+    }

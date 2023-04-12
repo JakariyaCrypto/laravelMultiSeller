@@ -1,0 +1,80 @@
+
+2/ coupon type percent error  /// 
+5/ Online payment 
+6/ verify
+
+
+
+
+//********************* kaj baki ace ****************//
+ 6/ login with social media 7/ share fb,tw ect
+
+8/ Admin panel role 9/ Setting 10/ profile 11/vendor 12/users 13/
+
+
+Seller panel
+1/ product
+2/ Wallet
+3/ Order
+4/ Transition
+5/ Withdraw
+6/ Reffar
+7/ Award
+8/ Profile
+
+
+
+
+
+
+
+
+get 7 days data
+
+$startDate = Carbon::today();
+$endDate = Carbon::today()->addDays(7);
+$invoices = Invoice::whereBetween('due_date', [$startDate, $endDate])->get();
+// Replace "due_date" with your actual column name
+// Check your model names, they should be singular and not plural.
+
+dd($invoices);
+
+
+
+
+    $current_date = Carbon::now();
+$date = Carbon::parse($current_date)->addMonths(24)->format('d-m-Y');
+       
+       $deviceInspections = DB::table('device_inspections')
+            ->orderBy('created_at', 'desc')
+            ->where('deleted_at', NULL)
+            ->whereDate('inspection_date', '<=', $date)
+            ->paginate(20);
+
+
+
+
+$date = Carbon::today()->addYears(2);
+
+$deviceInspections = DB::table('device_inspections')
+    ->orderBy('created_at', 'desc')
+    ->where('deleted_at', NULL)
+    ->whereDate('inspection_date', '<=', $date)
+    ->paginate(20);
+
+
+
+DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription
+
+
+
+
+Additional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional InformationAdditional Information
+
+
+Return & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & ConditionReturn & Condition
+
+
+
+
+composer create-project --prefer-dist laravel/laravel project-name "5.5.*"

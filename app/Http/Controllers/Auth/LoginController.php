@@ -31,13 +31,13 @@ class LoginController extends Controller
 // crate custom function
     protected function redirectTo()
     {
-        if(Auth()->user()->role == 'admin'){
-            return route('admin.dashboard');
-        }elseif (Auth()->user()->role == 'vendor') {
-            return route('vendor.dashboard');
-        }elseif (Auth()->user()->role == 'customer') {
-            return route('customer.dashboard');
-        }
+        // if(Auth()->user()->role == 'admin'){
+        //     return route('admin.dashboard');
+        // }elseif (Auth()->user()->role == 'vendor') {
+        //     return route('vendor.dashboard');
+        // }elseif (Auth()->user()->role == 'customer') {
+        //     return route('customer.dashboard');
+        // }
     }
     /**
      * Create a new controller instance.
@@ -67,13 +67,13 @@ class LoginController extends Controller
         //check user
         if (auth()->attempt(array('email'=>$input['email'],'password'=> $input['password']))) {
             
-            if (Auth()->user()->role == 'admin') {
-                return redirect()->route('admin.dashboard');
-            }elseif (Auth()->user()->role == 'vendor') {
-                return redirect()->route('vendor.dashboard');
-            }elseif (Auth()->user()->role == 'customer') {
-                return redirect()->route('customer.dashboard');
-            }
+            // if (Auth()->user()->role == 'admin') {
+            //     return redirect()->route('admin.dashboard');
+            // }elseif (Auth()->user()->role == 'vendor') {
+            //     return redirect()->route('vendor.dashboard');
+            // }elseif (Auth()->user()->role == 'customer') {
+            //     return redirect()->route('customer.dashboard');
+            // }
 
         }else{
             return redirect()->route('login')->with('error','E-mail & Password are Wrong !');

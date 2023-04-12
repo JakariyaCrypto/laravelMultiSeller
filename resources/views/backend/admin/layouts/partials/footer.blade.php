@@ -1,4 +1,6 @@
 <script src="{{asset('backend/assets/summernote-0.8.18/jquery-3.5.1.min.js')}}"></script>
+<script src="{{asset('backend/assets/multi-select/jquery-2.2.4.min.js')}}"></script>
+
 <script src="{{asset('backend/assets/vendors/jquery/dist/jquery.min.js')}}"></script>
     <script src="{{asset('backend/assets/vendors/popper.js/dist/umd/popper.min.js')}}"></script>
     <script src="{{asset('backend/assets/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
@@ -20,6 +22,7 @@
    
     <!-- include summernote css/js -->  
 <script src="{{asset('backend/assets/summernote-0.8.18/summernote.min.js')}}"></script>
+<script src="{{asset('backend/assets/sweetalert/sweetalert.min.js')}}"></script>
 
 <!-- data tble -->
 
@@ -30,6 +33,17 @@
     <script src="{{asset('backend/assets/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js')}}"></script>
     <script src="{{asset('backend/assets/vendors/jqvmap/dist/maps/jquery.vmap.world.js')}}"></script>
     <script src="{{asset('backend/assets/switch-button-bootstrap/dist/bootstrap-switch-button.min.js')}}"></script>
+
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="{{asset('backend/assets/select-picker/bootstrap-select.min.js')}}">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="{{asset('backend/assets/dropzone/dropzone.min.js')}}"></script>
+<!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.js" integrity="sha512-qVyIrsbrGQ5h762gmjgiGEyJdzsggN8JVR9C7s38zuCkgcnzvsgrXgbDU9YuM9hef7lDXUBTq2AOQzPHY3sFCA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+
+
     <script>
         (function($) {
             "use strict";

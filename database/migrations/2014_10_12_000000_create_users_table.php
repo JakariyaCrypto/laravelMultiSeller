@@ -21,8 +21,12 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('photo')->nullable();
             $table->text('address')->nullable();
+            $table->text('address2')->nullable();
+            $table->text('country')->nullable();
+            $table->text('city')->nullable();
+            $table->string('zip_code')->nullable();
+            $table->string('token')->nullable();
             $table->string('mobile')->nullable();
-            $table->enum('role',['admin','vendor','customer'])->default('customer');
             $table->enum('status',['active','inactive'])->default('active');
             $table->rememberToken();
             $table->timestamps();

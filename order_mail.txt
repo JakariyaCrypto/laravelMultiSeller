@@ -1,0 +1,26 @@
+
+
+
+*********************** verify mail *******************
+1/ create verify table and model
+	$table->integer('customer_id');
+	$table->integer('token');
+
+2/ create a funcion in User model
+
+	public function verifyCustomer()
+        {
+          return $this->hasOne('App\Models\frontend\customer\verifyCustomer');
+        }
+
+ 3/ create another function in VerfiyCustomer Model
+
+ 	public function customer(){
+    	return $this->belongsTo('App\Models\User','customer_id');
+    }
+
+4/ Create customer verify mail
+
+	php artisan make:mail CustomerVerfiyMail
+
+5/ 

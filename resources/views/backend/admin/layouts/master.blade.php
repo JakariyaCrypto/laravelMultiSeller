@@ -28,6 +28,8 @@
     @yield('script')
 
 
-    </body>
+
+</body>
+
 
 </html>

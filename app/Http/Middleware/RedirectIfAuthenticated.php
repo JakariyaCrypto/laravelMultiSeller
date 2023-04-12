@@ -22,17 +22,15 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
-            // if (Auth::guard($guard)->check()) {
-            //     return redirect(RouteServiceProvider::HOME);
-            // }
+            if (Auth::guard($guard)->check()) {
+                if ($guard === 'admin') {
+                    return redirect()->route('admin.dashboard');
+                }
+                if ($guard === 'seller') {
+                    return redirect()->route('seller.dashboard');
+                }
 
-            // custom codition
-            if (Auth::guard($guard)->check() && Auth::user()->role == 'admin') {
-                return redirect()->route('admin.dashboard');
-            }elseif (Auth::guard($guard)->check() && Auth::user()->role == 'vendor') {
-                return redirect()->route('vendor.dashboard');
-            }elseif (Auth::guard($guard)->check() && Auth::user()->role == 'customer') {
-                return redirect()->route('customer.dashboard');
+
             }
         }
 

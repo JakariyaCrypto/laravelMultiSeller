@@ -36,7 +36,7 @@
                     <h3> Admin Login </h3>
                 </div>
                 <div class="login-form">
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('admin.login') }}">
                         @csrf
                         <div class="form-group">
                             <label>Email address</label>

@@ -15,34 +15,34 @@ class UserSeederTable extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            // admin
-            [
-                'name'=> 'admin jk',
-                'email'=> 'admin@gmail.com',
-                'password'=> Hash::make('admin'),
-                'role'=> 'admin',
-                'status'=> 'active',
 
-            ],
-             // vendor
-             [
-                'name'=> 'vendor jk',
-                'email'=> 'vendor@gmail.com',
-                'password'=> Hash::make('vendor'),
-                'role'=> 'vendor',
-                'status'=> 'active',
-
-            ],
-
-             // admin
+             // customer
              [
                 'name'=> 'customer jk',
                 'email'=> 'customer@gmail.com',
                 'password'=> Hash::make('customer'),
-                'role'=> 'customer',
                 'status'=> 'active',
 
             ],
+        ]);
+
+        // admin
+        DB::table('admins')->insert([
+             [
+                'name'=> 'Admin Dev',
+                'email'=> 'admin@gmail.com',
+                'password'=> Hash::make('admin'),
+                'status'=> 'active',
+
+            ],
+        ]);
+
+        // seller
+        DB::table('sellers')->insert([
+            'name' => 'Seller Dev',
+            'email' => 'seller@gmail.com',
+            'password' => Hash::make('seller'),
+            'status' => 'active',
         ]);
     }
 }

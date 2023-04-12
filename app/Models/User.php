@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\frontend\customer\verifyCustomer;
 
 class User extends Authenticatable
 {
@@ -24,7 +25,14 @@ class User extends Authenticatable
         'address',
         'role',
         'status',
+        'token',
     ];
+
+
+    public function verifyCustomer()
+        {
+          return $this->hasOne(verifyCustomer::class,'customer_id');
+        }
 
     /**
      * The attributes that should be hidden for arrays.

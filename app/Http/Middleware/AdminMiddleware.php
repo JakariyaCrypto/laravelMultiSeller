@@ -18,10 +18,10 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next)
     {
         // custom function 
-        if (Auth::check() && Auth::user()->role == 'admin') {
+        if (Auth::guard('admin')->check()) {
             return $next($request);
         }else{
-            return redirect()->route('login');
+            return redirect()->route('admin.login.form')->with('warning','You Don`t Have Access Permission');
         }
     }
 }

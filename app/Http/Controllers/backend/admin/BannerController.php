@@ -192,6 +192,7 @@ class BannerController extends Controller
         $del = Banner::find($id);
 
         if ($del) {
+            $del->delete();
             $storePath = $del->photo;
             // delete existing file;
             if (File::exists($storePath)) {
