@@ -170,8 +170,11 @@
                                     @foreach($customer_order as $item)
 
                                         <tr>
-                                            <td class=""><a href="{{url('order-detail')}}/{{$item->id}}">{{$item->order_id}}</a></td>
-                                            <td class=""><a href="{{url('order-detail')}}/{{$item->id}}">{{Illuminate\Support\Carbon::parse($item->created_at)->format('d-M-y')}}</a></td>
+                                            <td class=""><a href="{{url('order-detail')}}/{{$item->id}}">{{$item->id}}</a></td>
+                                            <td class=""><a href="{{url('order-detail')}}/{{$item->id}}">created at</a></td>
+                                            <?php
+                                            // Illuminate\Support\Carbon::parse($item->created_at)->format('d-M-y')
+                                            ?>
                                             <td>
                                                 @foreach(\Illuminate\Support\Facades\DB::table('ordered_products')->where(['order_id'=>$item->id])->get() as $product)
                                                 <figure class="product-media">
@@ -183,21 +186,21 @@
                                                 </figure>
                                                 @endforeach
                                             </td>
-                                            <td class="price-col">{{$item->payment_status}}</td>
-                                            <td class="quantity-col">{{$item->payment_method}}</td>
+                                            <td class="price-col">payment status</td>
+                                            <td class="quantity-col">payment status</td>
 
-                                            @if($item->order_status == 'pendding')
-                                            <td class="quantity-col"><span class="order-pendding">{{$item->order_status}}</span></td>
-                                            @elseif($item->order_status == 'success')
-                                            <td class="quantity-col"><span class="order-success">{{$item->order_status}}</span></td>
+                                            @if($item->status == 'pendding')
+                                            <td class="quantity-col"><span class="order-pendding">{{$item->status}}</span></td>
+                                            @elseif($item->status  == 'success')
+                                            <td class="quantity-col"><span class="order-success">{{$item->status}}</span></td>
                                             @else
-                                            <td class="quantity-col"><span class="order-cancel">{{$item->order_status}}</span></td>
+                                            <td class="quantity-col"><span class="order-cancel">{{$item->status}}</span></td>
                                             @endif
                                             <?php
-                                                $sum = $item->sub_total + $item->shipping_charge;
-                                                $total = $sum - $item->coupon_value;
+                                                // $sum = $item->sub_total + $item->shipping_charge;
+                                                // $total = $sum - $item->coupon_value;
                                             ?>
-                                            <td class="quantity-col">{{$sum}}</td>
+                                            <td class="quantity-col">total</td>
                                             <td class="d-flex">
                                                 <a href="{{route('admin.order.detail',$item->id)}}" data-toggle="tooltip" data-placement="top" title="view product" class="btn btn-sm btn-outline-info rounded mr-1"><i class="fa fa-eye font-lg"></i></a>
 
